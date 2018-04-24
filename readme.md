@@ -3,10 +3,12 @@
 - 仅仅是提供了表格的绘制
 
 ---
-####表格控件 **TableView**
+表格控件 **TableView**
+
 ![tableView](https://github.com/yudapiandroid/tableview/blob/master/images/table_view.jpg)
 图中红色标出的一个方块称为一个 cell
-#####自定义属性
+
+自定义属性
 - 背景颜色 bgColor
 - 分割线颜色 borderColor
 - 分割线大小 borderWidth
@@ -27,7 +29,7 @@
 ```
 
 ---
-####可以水平滚动的表格控件 **HScrollTableView**
+可以水平滚动的表格控件 **HScrollTableView**
 这个的自定义属性和上面的一样只是前面加了一个 h_
 
 ```xml
@@ -45,7 +47,7 @@
 ```
 
 ---
-####自定义绘制的内容
+自定义绘制的内容
 通过实现 DrawLayer 来实现内容的绘制
 ```java
 public interface DrawLayer {
@@ -60,9 +62,9 @@ public interface DrawLayer {
 有一个自带的实现，DrawBitmapLayer
 
 ---
-####使用说明
+使用说明
 
-#####配置仓库地址
+配置仓库地址
 ```xml
 allprojects {
 		repositories {
@@ -72,14 +74,14 @@ allprojects {
 	}
 ```
 
-#####添加依赖
+添加依赖
 ```xml
 dependencies {
 	        compile 'com.github.yudapiandroid:tableview:0.0.1'
 	}
 ```
 
-#####声明控件
+声明控件
 ```xml
 <com.suse.dapi.tableview.core.view.HScrollTableView
         android:id="@+id/table"
@@ -94,7 +96,7 @@ dependencies {
     </com.suse.dapi.tableview.core.view.HScrollTableView>
 ```
 
-#####绑定数据
+绑定数据
 ```java
 HScrollTableView tableView = (HScrollTableView) findViewById(R.id.table);
 List<Object> data = new ArrayList<>();
