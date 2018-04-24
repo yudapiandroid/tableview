@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.suse.dapi.tableview.core.view.HScrollTableView
+            android:id="@+id/table_1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:h_bgColor="#fff"
+            app:h_borderColor="#aaa"
+            app:h_borderWidth="1dp"
+            app:h_pHeight="20dp"
+            app:h_pWidth="20dp"
+            app:h_row="5"
+            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+
+        <com.suse.dapi.tableview.core.view.HScrollTableView
+            android:id="@+id/table_2"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            app:h_bgColor="#fff"
+            app:h_borderColor="#aaa"
+            app:h_borderWidth="1dp"
+            app:h_pHeight="20dp"
+            app:h_pWidth="20dp"
+            app:h_row="5"
+            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.suse.dapi.tableview.core.view.HScrollTableView
+            android:id="@+id/table_3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:h_bgColor="#fff"
+            app:h_borderColor="#aaa"
+            app:h_borderWidth="1dp"
+            app:h_pHeight="20dp"
+            app:h_pWidth="20dp"
+            app:h_row="5"
+            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+
+        <com.suse.dapi.tableview.core.view.HScrollTableView
+            android:layout_width="0dp"
+            android:id="@+id/table_4"
+            android:layout_weight="1"
+            app:h_bgColor="#fff"
+            app:h_borderColor="#aaa"
+            app:h_borderWidth="1dp"
+            app:h_pHeight="20dp"
+            app:h_pWidth="20dp"
+            app:h_row="5"
+            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+
+        <com.suse.dapi.tableview.core.view.HScrollTableView
+            android:layout_width="0dp"
+            android:id="@+id/table_5"
+            android:layout_weight="1"
+            app:h_bgColor="#fff"
+            app:h_borderColor="#aaa"
+            app:h_borderWidth="1dp"
+            app:h_pHeight="20dp"
+            app:h_pWidth="20dp"
+            app:h_row="5"
+            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseTableView">
+        <attr name="pWidth" format="dimension"/>
+        <attr name="pHeight" format="dimension"/>
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="bgColor" format="color"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="row" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="HScrollTableView">
+        <attr name="h_pWidth" format="dimension"/>
+        <attr name="h_pHeight" format="dimension"/>
+        <attr name="h_borderWidth" format="dimension"/>
+        <attr name="h_bgColor" format="color"/>
+        <attr name="h_borderColor" format="color"/>
+        <attr name="h_row" format="integer"/>
+    </declare-styleable>
+</resources>
