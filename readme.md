@@ -4,6 +4,7 @@
 
 ---
 ####表格控件 **TableView**
+![tableView](https://github.com/yudapiandroid/tableview/blob/master/images/table_view.jpg)
 图中红色标出的一个方块称为一个 cell
 #####自定义属性
 - 背景颜色 bgColor
