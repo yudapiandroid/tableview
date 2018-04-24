@@ -13,7 +13,5 @@ import java.util.List;
  *
  */
 public interface DrawLayer {
-
     void draw(List<Rect> cells,List<Object> data, Canvas canvas);
-
 }

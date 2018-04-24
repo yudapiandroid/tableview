@@ -26,10 +26,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        content = (RecyclerView) findViewById(R.id.rv_content);
+        /*content = (RecyclerView) findViewById(R.id.rv_content);
         GridLayoutManager manager = new GridLayoutManager(this,1);
         content.setLayoutManager(manager);
-        content.setAdapter(new DemoAdapter());
+        content.setAdapter(new DemoAdapter());*/
+        HScrollTableView tableView = (HScrollTableView) findViewById(R.id.table);
+        List<Object> data = new ArrayList<>();
+        tableView.setData(data);
+        tableView.addDrawLayer(new DrawBitmapLayer(
+                BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher),
+                2
+        ));
+        tableView.notifyDataSetChange();
     }
 }
 

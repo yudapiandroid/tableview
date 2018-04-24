@@ -6,12 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_content"
+    <com.suse.dapi.tableview.core.view.TableView
+        app:bgColor="#fff"
+        app:borderColor="#aaa"
+        app:borderWidth="1dp"
+        app:pHeight="20dp"
+        app:pWidth="20dp"
+        app:row="10"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="200dp" />
+
+    <com.suse.dapi.tableview.core.view.HScrollTableView
+        android:id="@+id/table"
+        app:h_pWidth="20dp"
+        app:h_pHeight="20dp"
+        app:h_borderWidth="1dp"
+        app:h_borderColor="#aaa"
+        app:h_bgColor="#fff"
+        app:h_row="10"
+        android:layout_width="match_parent"
+        android:layout_height="207dp">
+    </com.suse.dapi.tableview.core.view.HScrollTableView>
 
     <Button
         android:id="@+id/add"
