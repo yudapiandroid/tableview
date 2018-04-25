@@ -6,31 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.suse.dapi.tableview.core.view.TableView
-        app:bgColor="#fff"
-        app:borderColor="#aaa"
-        app:borderWidth="1dp"
-        app:pHeight="20dp"
-        app:pWidth="20dp"
-        app:row="10"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
 
-    <com.suse.dapi.tableview.core.view.HScrollTableView
+    <com.suse.dapi.tableview.core.view.CombainTableView
         android:id="@+id/table"
-        app:h_pWidth="20dp"
-        app:h_pHeight="20dp"
-        app:h_borderWidth="1dp"
-        app:h_borderColor="#aaa"
-        app:h_bgColor="#fff"
-        app:h_row="10"
-        android:layout_width="match_parent"
-        android:layout_height="207dp">
-    </com.suse.dapi.tableview.core.view.HScrollTableView>
+        app:c_bg_color="#fff"
+        app:c_border_color="#eee"
+        app:c_border_width="1dp"
+        app:c_column="10"
+        app:c_row="10"
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+    </com.suse.dapi.tableview.core.view.CombainTableView>
 
-    <Button
-        android:id="@+id/add"
-        android:text="add_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </LinearLayout>

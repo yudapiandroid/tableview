@@ -28,16 +28,6 @@ public class DrawBitmapLayer implements DrawLayer {
         paint.setAntiAlias(true);
     }
 
-    @Override
-    public void draw(List<Rect> cells, List<Object> data, Canvas canvas) {
-        if(bitmap == null){
-            return;
-        }
-        for (int i = 0;i < cells.size();i++){
-            drawCell(cells.get(i),data.get(i),canvas);
-        }
-    }// end m
-
     private void drawCell(Rect rect, Object o, Canvas canvas) {
         Rect newRect = new Rect();
         newRect.left = rect.left + padding;
@@ -61,4 +51,8 @@ public class DrawBitmapLayer implements DrawLayer {
         reSizeBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
     }
 
+    @Override
+    public void draw(Object data, Rect rect, Canvas canvas) {
+        drawCell(rect,data,canvas);
+    }
 }

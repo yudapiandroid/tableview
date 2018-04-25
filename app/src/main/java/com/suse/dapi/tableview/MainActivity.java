@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 
 import com.suse.dapi.tableview.core.prefab.DrawBitmapLayer;
+import com.suse.dapi.tableview.core.view.CombainTableView;
 import com.suse.dapi.tableview.core.view.HScrollTableView;
 import com.suse.dapi.tableview.core.view.TableView;
 
@@ -20,24 +21,21 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView content;
+    private CombainTableView tableView;
 
+    private Object data[][];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*content = (RecyclerView) findViewById(R.id.rv_content);
-        GridLayoutManager manager = new GridLayoutManager(this,1);
-        content.setLayoutManager(manager);
-        content.setAdapter(new DemoAdapter());*/
-        HScrollTableView tableView = (HScrollTableView) findViewById(R.id.table);
-        List<Object> data = new ArrayList<>();
+        tableView = (CombainTableView) findViewById(R.id.table);
+        data = new Object[10][10000];
         tableView.setData(data);
         tableView.addDrawLayer(new DrawBitmapLayer(
                 BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher),
                 2
         ));
-        tableView.notifyDataSetChange();
     }
 }
 
@@ -63,11 +61,11 @@ class DemoAdapter extends RecyclerView.Adapter{
 
         public DemoViewHolder(View itemView) {
             super(itemView);
-            setTableView((HScrollTableView) itemView.findViewById(R.id.table_1));
+            /*setTableView((HScrollTableView) itemView.findViewById(R.id.table_1));
             setTableView((HScrollTableView) itemView.findViewById(R.id.table_2));
             setTableView((HScrollTableView) itemView.findViewById(R.id.table_3));
             setTableView((HScrollTableView) itemView.findViewById(R.id.table_4));
-            setTableView((HScrollTableView) itemView.findViewById(R.id.table_5));
+            setTableView((HScrollTableView) itemView.findViewById(R.id.table_5));*/
         }
 
         public void setTableView(HScrollTableView tableView){
@@ -75,10 +73,6 @@ class DemoAdapter extends RecyclerView.Adapter{
             for (int i=0;i < 4000;i++){
                 data.add(new Object());
             }
-            tableView.setData(data);
-            tableView.addDrawLayer(new DrawBitmapLayer(
-                    BitmapFactory.decodeResource(tableView.getResources(),R.mipmap.ic_launcher),2
-            ));
         }
     }
 }
