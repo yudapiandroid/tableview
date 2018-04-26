@@ -5,11 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.suse.dapi.tableview.core.view.DrawLayer;
 
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/25.
@@ -38,7 +36,7 @@ public class DrawBitmapLayer implements DrawLayer {
             reSize(newRect);
         }
         canvas.drawBitmap(reSizeBitmap,newRect.left,newRect.top,paint);
-    }
+    }// end m
 
     private void reSize(Rect newRect) {
         if(bitmap == null){

@@ -9,8 +9,6 @@ import android.graphics.Rect;
 
 public interface CellAware {
 
-    Rect[][] loadCells();
-
     Rect getRectByRowWithColumn(int row,int column);
 
     int getCellWidth();
@@ -18,5 +16,9 @@ public interface CellAware {
     int getCellHeight();
 
     int getBorderWidth();
+
+
+    int getRow();
+    int getColumn();
 
 }

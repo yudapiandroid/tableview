@@ -9,10 +9,11 @@ import android.widget.FrameLayout;
 
 import com.suse.dapi.tableview.core.R;
 
+import java.util.List;
+
 /**
  * Created by YuXin on 2018/4/25.
  */
-
 public class CombainTableView extends FrameLayout implements TableViewHand{
 
     private TableBgView bgView;
@@ -80,7 +81,7 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
     }
 
     @Override
-    public void setData(Object[][] data) {
+    public void setData(List<Object> data) {
         if(tableView != null){
             tableView.setData(data);
         }
@@ -92,4 +93,5 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
             tableView.notifyDataSetChange();
         }
     }
+
 }

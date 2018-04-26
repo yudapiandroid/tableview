@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.suse.dapi.tableview.core.utils.Log;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 public class TableView extends View implements TableViewHand,ScrollXChangeListener{
 
     private List<DrawLayer> layers = new ArrayList<>();
-    private Object[][] data;
+    private List<Object> data;
     private CellAware cellAware;
     private ScrollHandler scrollHandler;
 
@@ -55,8 +55,8 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        if(cellAware != null && data != null && data[0] != null){
-            int column = data[0].length;
+        if(cellAware != null && data != null){
+            int column = data.size() % cellAware.getRow() == 0 ? data.size() / cellAware.getRow() : data.size() / cellAware.getRow() + 1;
             width = (cellAware.getCellWidth() + cellAware.getBorderWidth()) * column;
         }
         setMeasuredDimension(width,height);
@@ -64,20 +64,26 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(cellAware == null || cellAware.loadCells() == null || data == null){
+        if(cellAware == null || data == null){
             return;
         }
+        int column = cellAware.getColumn();
+        int row = cellAware.getRow();
+        int allColumn = data.size() % row == 0 ? data.size() / row : data.size() / row + 1;
+        int startColumn = getStartColumnByOffsetX(offsetX,cellAware.getCellWidth());
+        int endColumn = startColumn + column + column / 4;
+        endColumn = endColumn > allColumn ? allColumn : endColumn;
 
-        int row = cellAware.loadCells().length;
-        int column = cellAware.loadCells()[0].length;
-        int cellWidth = cellAware.loadCells()[0][0].width();
-        int startColumn = getStartColumnByOffsetX(offsetX,cellWidth);
-        for (int i = startColumn;i < startColumn + column + column / 3;i++){
-            for (int j = 0;j < row;j++){
-                drawByCell(j ,i ,cellAware.getRectByRowWithColumn(j,i),data[j][i],canvas);
+        for (int i = startColumn; i < endColumn; i++){
+            for (int j = 0; j < row; j++){
+                int index = i * row + j;
+                if(index < data.size()){
+                    drawByCell(j ,i ,cellAware.getRectByRowWithColumn(j,i),
+                            index >= data.size() ? null : data.get(index),canvas);
+                }
             }
         }
-    }
+    } // end m
 
     /**
      *
@@ -85,9 +91,14 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
      *
      * @param offsetX
      * @return
+     *
      */
     private int getStartColumnByOffsetX(int offsetX, int cellWidth) {
-        return offsetX / cellWidth  - 1 < 0 ? 0 : offsetX / cellWidth - 1;
+        if(cellAware == null){
+            return 0;
+        }
+        int number = offsetX / (cellWidth + cellAware.getBorderWidth());
+        return number <= 0 ? 0 : number - 1;
     }
 
 
@@ -117,18 +128,17 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
      */
     @Override
     public void scrollFinish() {
-        int cellWidth = cellAware.loadCells()[0][0].width();
-        if(offsetX % cellWidth == 0){
-            // 不需要会馆
-
-        }else{
-            translatToColumn(getStartColumnByOffsetX(offsetX,cellWidth));
+        if(offsetX > 0 && cellAware != null){
+            int column = offsetX / (cellAware.getBorderWidth() + cellAware.getCellWidth());
+            column = column < 0 ? 0 : column;
+            translatToColumn(column);
         }
     }
 
-    private void translatToColumn(int startColumnByOffsetX) {
-        if(scrollHandler != null){
-            scrollHandler.scrollTo(startColumnByOffsetX);
+    private void translatToColumn(int column) {
+        if(scrollHandler != null && cellAware != null){
+            int sx = column * (cellAware.getCellWidth() + cellAware.getBorderWidth());
+            scrollHandler.scrollTo(sx);
         }
     }
 
@@ -144,7 +154,7 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
 
 
     @Override
-    public void setData(Object[][] data) {
+    public void setData(List<Object> data) {
         this.data = data;
         notifyDataSetChange();
     }
@@ -153,6 +163,14 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
     @Override
     public void notifyDataSetChange() {
         requestLayout();
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if(scrollHandler != null){
+                    scrollHandler.scrollTo(getMeasuredWidth());
+                }
+            }
+        });
     }// end m
 
 

@@ -18,4 +18,16 @@
         android:layout_height="300dp">
     </com.suse.dapi.tableview.core.view.CombainTableView>
 
+    <Button
+        android:id="@+id/add"
+        android:text="ADD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/remove"
+        android:text="REMOVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

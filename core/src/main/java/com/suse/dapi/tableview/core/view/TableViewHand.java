@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TableViewHand {
     void addDrawLayer(DrawLayer layer);
-    void setData(Object[][] data);
+    void setData(List<Object> data);
     void notifyDataSetChange();
 }

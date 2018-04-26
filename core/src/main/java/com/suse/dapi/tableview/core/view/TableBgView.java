@@ -49,8 +49,6 @@ public class TableBgView extends View implements CellAware {
     private int cellHeight = -1;
     private Paint borderPaint;
 
-    private Rect[][] cells;
-
     private static final int DEFAULT_BG_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_WIDTH = Color.WHITE;
@@ -125,8 +123,6 @@ public class TableBgView extends View implements CellAware {
             row = height / cellHeight;
             column = width / cellWidth;
         }
-
-        initCells(cellWidth,cellHeight,row,column);
     } // end m
 
     @Override
@@ -162,32 +158,6 @@ public class TableBgView extends View implements CellAware {
         }
     }
 
-
-    /**
-     *
-     * 初始化 cell 的边界
-     *
-     */
-    private void initCells(int cellW, int cellH, int row, int column) {
-        cells = new Rect[row][column];
-        for(int i = 0;i < row;i++){
-            for (int j = 0;j < column;j++){
-                Rect temp = new Rect();
-                temp.left = column * borderWidth + cellW * column;
-                temp.right = temp.left + cellW;
-                temp.top = row * (borderWidth + cellH);
-                temp.bottom = temp.top + cellH;
-                cells[i][j] = temp;
-            }
-        }
-    } // end m
-
-
-    @Override
-    public Rect[][] loadCells() {
-        return cells;
-    }
-
     @Override
     public Rect getRectByRowWithColumn(int row, int column) {
         Rect rect = new Rect();
@@ -211,6 +181,16 @@ public class TableBgView extends View implements CellAware {
     @Override
     public int getBorderWidth() {
         return borderWidth;
+    }
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public int getColumn() {
+        return column;
     }
 
 }

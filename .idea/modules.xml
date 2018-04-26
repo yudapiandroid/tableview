@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\AndroidNew\tableview\app\app.iml" filepath="E:\AndroidNew\tableview\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://E:\AndroidNew\tableview\core\core.iml" filepath="E:\AndroidNew\tableview\core\core.iml" />
       <module fileurl="file://$PROJECT_DIR$/tableview.iml" filepath="$PROJECT_DIR$/tableview.iml" />
-      <module fileurl="file://E:\AndroidNew\tableview\tableview.iml" filepath="E:\AndroidNew\tableview\tableview.iml" />
     </modules>
   </component>
 </project>
