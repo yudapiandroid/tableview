@@ -6,6 +6,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.chillingvan.canvasgl.ICanvasGL;
 import com.suse.dapi.tableview.core.view.DrawLayer;
 
 
@@ -57,4 +58,7 @@ public class DrawBitmapLayer implements DrawLayer {
     public void draw(Object data, Rect rect, Canvas canvas) {
         drawCell(rect,data,canvas);
     }
+
+    @Override
+    public void draw(Object data, Rect rect, ICanvasGL gl) {}
 }

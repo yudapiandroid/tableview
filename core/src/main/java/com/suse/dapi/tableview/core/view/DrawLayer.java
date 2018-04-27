@@ -3,6 +3,8 @@ package com.suse.dapi.tableview.core.view;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.chillingvan.canvasgl.ICanvasGL;
+
 import java.util.List;
 
 /**
@@ -15,5 +17,7 @@ import java.util.List;
 public interface DrawLayer {
 
     void draw(Object data,Rect rect, Canvas canvas);
+
+    void draw(Object data, Rect rect, ICanvasGL gl);
 
 }

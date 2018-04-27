@@ -150,7 +150,6 @@ public class TableBgView extends View implements CellAware {
      */
     private void drawByCellWidthHeight(Canvas canvas) {
         // 横线
-        Log.i("draw "+getMeasuredHeight()+"  cell "+cellHeight);
         for (int y = cellHeight;y < getMeasuredHeight();y += cellHeight){
             canvas.drawLine(0,y,getMeasuredWidth(),y,borderPaint);
             y += borderWidth;

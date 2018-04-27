@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.chillingvan.canvasgl.ICanvasGL;
 import com.suse.dapi.tableview.core.utils.Log;
 import com.suse.dapi.tableview.core.view.DrawLayer;
 import com.suse.dapi.tableview.entrys.TypeBitmapModel;
@@ -50,6 +52,37 @@ public class TypeBitmapLayer implements DrawLayer {
             drawCell(m,rect,canvas);
         }
     }
+
+    @Override
+    public void draw(Object data, Rect rect, ICanvasGL gl) {
+        if(data == null || context == null){
+            return;
+        }
+        if(data instanceof TypeBitmapModel){
+            TypeBitmapModel m = (TypeBitmapModel) data;
+            drawCell(m,rect,gl);
+        }
+    }
+
+    private void drawCell(TypeBitmapModel m, Rect rect, ICanvasGL canvas) {
+        if(bitmapRef == null && !bitmapRef.containsKey(Integer.valueOf(m.getCurrentType()))){
+            return;
+        }
+        Integer res = bitmapRef.get(m.getCurrentType());
+        if(res == null){
+            return;
+        }
+        if(bitmapPool.get(res) == null){
+            // 加载bitmap
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), res);
+            bitmapPool.put(res,resizeBitmap(bitmap,rect,padding));
+        }
+        if(bitmapPool.get(res) == null){
+            return;
+        }
+        // 绘制
+        canvas.drawBitmap(bitmapPool.get(res),rect.left + padding,rect.top + padding);
+    }// end m
 
 
     private void drawCell(TypeBitmapModel m, Rect rect, Canvas canvas) {

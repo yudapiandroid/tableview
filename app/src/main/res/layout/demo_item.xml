@@ -26,6 +26,7 @@
                 app:c_cell_height="15dp"
                 android:layout_width="143dp"
                 app:c_first_use_row="false"
+                app:c_use_surface="true"
                 android:layout_height="match_parent">
             </com.suse.dapi.tableview.core.view.CombainTableView>
 
@@ -43,6 +44,7 @@
                 app:c_border_width="1dp"
                 android:layout_width="match_parent"
                 app:c_first_use_row="false"
+                app:c_use_surface="true"
                 android:layout_height="match_parent">
             </com.suse.dapi.tableview.core.view.CombainTableView>
 
@@ -67,6 +69,7 @@
                 app:c_cell_height="15dp"
                 app:c_first_use_row="false"
                 android:layout_width="143dp"
+                app:c_use_surface="true"
                 android:layout_height="match_parent">
             </com.suse.dapi.tableview.core.view.CombainTableView>
 
@@ -84,6 +87,7 @@
                 app:c_cell_height="15dp"
                 app:c_first_use_row="false"
                 android:layout_width="143dp"
+                app:c_use_surface="true"
                 android:layout_height="match_parent">
             </com.suse.dapi.tableview.core.view.CombainTableView>
 
@@ -100,6 +104,7 @@
                 app:c_cell_width="15dp"
                 app:c_cell_height="15dp"
                 app:c_first_use_row="false"
+                app:c_use_surface="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.suse.dapi.tableview.core.view.CombainTableView>

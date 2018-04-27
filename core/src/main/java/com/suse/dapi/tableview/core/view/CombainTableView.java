@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -18,7 +19,7 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
 
     private TableBgView bgView;
     private HScrollTableView hScrollTableView;
-    private TableView tableView;
+    private View tableView;
 
     public CombainTableView(Context context) {
         super(context);
@@ -39,6 +40,7 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
         int cellWidth = (int) arr.getDimension(R.styleable.CombainTableView_c_cell_width,-1);
         int cellHeight = (int) arr.getDimension(R.styleable.CombainTableView_c_cell_height,-1);
         boolean firstRow = arr.getBoolean(R.styleable.CombainTableView_c_first_use_row,true);
+        boolean useSurface = arr.getBoolean(R.styleable.CombainTableView_c_use_surface,false);
         arr.recycle();
         // 初始化控件
         if(row > 0){
@@ -58,14 +60,16 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
         hScrollTableView.setLayoutParams(hsParams);
         addView(hScrollTableView);
 
-        tableView = new TableView(context);
+        tableView = useSurface ? new TableSurfaceView(context) : new TableView(context);
         HScrollTableView.LayoutParams tableParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         tableView.setLayoutParams(tableParams);
         hScrollTableView.addView(tableView);
 
-        hScrollTableView.setxChangeListener(tableView);
-        tableView.setScrollHandler(hScrollTableView);
-        tableView.setCellAware(bgView);
+
+        hScrollTableView.setxChangeListener((ScrollXChangeListener) tableView);
+        TableViewUI tv = (TableViewUI) tableView;
+        tv.setScrollHandler(hScrollTableView);
+        tv.setCellAware(bgView);
 
     }// end m
 
@@ -77,21 +81,21 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
     @Override
     public void addDrawLayer(DrawLayer layer) {
         if(tableView != null){
-            tableView.addDrawLayer(layer);
+            ((TableViewHand)tableView).addDrawLayer(layer);
         }
     }
 
     @Override
     public void setData(List<Object> data) {
         if(tableView != null){
-            tableView.setData(data);
+            ((TableViewHand)tableView).setData(data);
         }
     }
 
     @Override
     public void notifyDataSetChange() {
         if(tableView != null){
-            tableView.notifyDataSetChange();
+            ((TableViewHand)tableView).notifyDataSetChange();
         }
     }
 

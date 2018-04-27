@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2018/4/24.
  */
-public class TableView extends View implements TableViewHand,ScrollXChangeListener{
+public class TableView extends View implements TableViewHand,ScrollXChangeListener,TableViewUI{
 
     private List<DrawLayer> layers = new ArrayList<>();
     private List<Object> data;
@@ -24,9 +24,7 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
     private ScrollHandler scrollHandler;
 
     /**
-     *
      * 滑动的时候的 偏移量 这个偏移量是相对 原点的
-     *
      */
     private int offsetX = 0;
 
@@ -162,7 +160,8 @@ public class TableView extends View implements TableViewHand,ScrollXChangeListen
 
     @Override
     public void notifyDataSetChange() {
-        requestLayout();
+        // requestLayout();
+        invalidate();
         post(new Runnable() {
             @Override
             public void run() {

@@ -1,5 +1,6 @@
 package com.suse.dapi.tableview;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             m.setDrawRB(random.nextBoolean());
             m.setDrawRT(random.nextBoolean());
             data.add(m);
-            Log.i("M : "+m);
         }
         view.addDrawLayer(drawLayer);
         view.setData(data);
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         GridLayoutManager manager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(new DemoAdapter());
+        recyclerView.setAdapter(new DemoAdapter(this));
     }// end m
 
 }
@@ -160,6 +160,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 class DemoAdapter extends RecyclerView.Adapter{
+
+    private LeftBottomLayer lbLayer = new LeftBottomLayer();
+    private CenterBottomLayer cbLayer = new CenterBottomLayer();
+    private RightBottomLayer rbLayer = new RightBottomLayer();
+    private TypeBitmapLayer ltLayer;
+    private TypeBitmapLayer rtLayer;
+
+    private Context context;
+
+    public DemoAdapter(Context context) {
+        this.context = context;
+        initLayerLT();
+        initLayerRT();
+    }
+
+    private void initLayerLT(){
+        Map<Integer,Integer> bitmapRef = new HashMap<>();
+        bitmapRef.put(TypeBitmapModel.TYPE_01,R.mipmap.icon_4);
+        bitmapRef.put(TypeBitmapModel.TYPE_02,R.mipmap.icon_5);
+        bitmapRef.put(TypeBitmapModel.TYPE_03,R.mipmap.icon_6);
+        ltLayer = new TypeBitmapLayer(bitmapRef,context);
+    }
+
+    private void initLayerRT(){
+        Map<Integer,Integer> bitmapRef = new HashMap<>();
+        bitmapRef.put(TypeBitmapModel.TYPE_01,R.mipmap.icon_01);
+        bitmapRef.put(TypeBitmapModel.TYPE_02,R.mipmap.icon_02);
+        bitmapRef.put(TypeBitmapModel.TYPE_03,R.mipmap.icon_03);
+        rtLayer = new TypeBitmapLayer(bitmapRef,context);
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -200,12 +230,14 @@ class DemoAdapter extends RecyclerView.Adapter{
         }
 
 
+
+
         private void initData() {
             initLeftTop();
             initRightTop();
-            initBottom(leftBottomView,new LeftBottomLayer());
-            initBottom(centerBottomView,new CenterBottomLayer());
-            initBottom(rightBottomView,new RightBottomLayer());
+            initBottom(leftBottomView,lbLayer);
+            initBottom(centerBottomView,cbLayer);
+            initBottom(rightBottomView,rbLayer);
         }
 
 
@@ -214,7 +246,7 @@ class DemoAdapter extends RecyclerView.Adapter{
             List<Object> data = new ArrayList<>();
             Random random = new Random();
             int color[] = new int[]{Color.RED,Color.GREEN};
-            for (int i=0;i < 100;i++){
+            for (int i=0;i < 1024;i++){
                 FourPerCellModel m = new FourPerCellModel();
                 m.setColorLB(color[random.nextInt(2)]);
                 m.setColorLT(color[random.nextInt(2)]);
@@ -225,7 +257,6 @@ class DemoAdapter extends RecyclerView.Adapter{
                 m.setDrawRB(random.nextBoolean());
                 m.setDrawRT(random.nextBoolean());
                 data.add(m);
-                Log.i("M : "+m);
             }
             view.addDrawLayer(drawLayer);
             view.setData(data);
@@ -240,7 +271,7 @@ class DemoAdapter extends RecyclerView.Adapter{
         private void initRightTop() {
             List<Object> data = new ArrayList<>();
             Random random = new Random();
-            for(int i = 0;i < 100;i++){
+            for(int i = 0;i < 1024;i++){
                 TypeBitmapModel model = new TypeBitmapModel();
                 int r = random.nextInt(4);
                 if(r == 0){
@@ -257,12 +288,7 @@ class DemoAdapter extends RecyclerView.Adapter{
                 }
                 data.add(model);
             }
-            Map<Integer,Integer> bitmapRef = new HashMap<>();
-            bitmapRef.put(TypeBitmapModel.TYPE_01,R.mipmap.icon_4);
-            bitmapRef.put(TypeBitmapModel.TYPE_02,R.mipmap.icon_5);
-            bitmapRef.put(TypeBitmapModel.TYPE_03,R.mipmap.icon_6);
-            TypeBitmapLayer layer = new TypeBitmapLayer(bitmapRef,leftTopView.getContext());
-            rightTopView.addDrawLayer(layer);
+            rightTopView.addDrawLayer(ltLayer);
             rightTopView.setData(data);
         }
 
@@ -275,7 +301,7 @@ class DemoAdapter extends RecyclerView.Adapter{
         private void initLeftTop() {
             List<Object> data = new ArrayList<>();
             Random random = new Random();
-            for(int i = 0;i < 100;i++){
+            for(int i = 0;i < 10;i++){
                 TypeBitmapModel model = new TypeBitmapModel();
                 int r = random.nextInt(4);
                 if(r == 0){
@@ -292,12 +318,7 @@ class DemoAdapter extends RecyclerView.Adapter{
                 }
                 data.add(model);
             }
-            Map<Integer,Integer> bitmapRef = new HashMap<>();
-            bitmapRef.put(TypeBitmapModel.TYPE_01,R.mipmap.icon_01);
-            bitmapRef.put(TypeBitmapModel.TYPE_02,R.mipmap.icon_02);
-            bitmapRef.put(TypeBitmapModel.TYPE_03,R.mipmap.icon_03);
-            TypeBitmapLayer layer = new TypeBitmapLayer(bitmapRef,leftBottomView.getContext());
-            leftTopView.addDrawLayer(layer);
+            leftTopView.addDrawLayer(rtLayer);
             leftTopView.setData(data);
         }
 
