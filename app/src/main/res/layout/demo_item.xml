@@ -6,76 +6,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.suse.dapi.tableview.core.view.HScrollTableView
-            android:id="@+id/table_1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:h_bgColor="#fff"
-            app:h_borderColor="#aaa"
-            app:h_borderWidth="1dp"
-            app:h_pHeight="20dp"
-            app:h_pWidth="20dp"
-            app:h_row="5"
-            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
 
-        <com.suse.dapi.tableview.core.view.HScrollTableView
-            android:id="@+id/table_2"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            app:h_bgColor="#fff"
-            app:h_borderColor="#aaa"
-            app:h_borderWidth="1dp"
-            app:h_pHeight="20dp"
-            app:h_pWidth="20dp"
-            app:h_row="5"
-            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
-
-    </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.suse.dapi.tableview.core.view.HScrollTableView
-            android:id="@+id/table_3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            app:h_bgColor="#fff"
-            app:h_borderColor="#aaa"
-            app:h_borderWidth="1dp"
-            app:h_pHeight="20dp"
-            app:h_pWidth="20dp"
-            app:h_row="5"
-            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="95dp">
 
-        <com.suse.dapi.tableview.core.view.HScrollTableView
-            android:layout_width="0dp"
-            android:id="@+id/table_4"
-            android:layout_weight="1"
-            app:h_bgColor="#fff"
-            app:h_borderColor="#aaa"
-            app:h_borderWidth="1dp"
-            app:h_pHeight="20dp"
-            app:h_pWidth="20dp"
-            app:h_row="5"
-            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_left_top"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                android:layout_width="143dp"
+                app:c_first_use_row="false"
+                app:c_use_surface="true"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
 
-        <com.suse.dapi.tableview.core.view.HScrollTableView
-            android:layout_width="0dp"
-            android:id="@+id/table_5"
-            android:layout_weight="1"
-            app:h_bgColor="#fff"
-            app:h_borderColor="#aaa"
-            app:h_borderWidth="1dp"
-            app:h_pHeight="20dp"
-            app:h_pWidth="20dp"
-            app:h_row="5"
-            android:layout_height="104dp"></com.suse.dapi.tableview.core.view.HScrollTableView>
+            <View
+                android:background="#ffff00"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
 
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_right_top"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_border_width="1dp"
+                android:layout_width="match_parent"
+                app:c_first_use_row="false"
+                app:c_use_surface="true"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+        </LinearLayout>
+
+        <View
+            android:background="#ffff00"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="47dp">
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_left_bottom"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_first_use_row="false"
+                android:layout_width="143dp"
+                app:c_use_surface="true"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+            <View
+                android:background="#ff0"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_center_bottom"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_first_use_row="false"
+                android:layout_width="143dp"
+                app:c_use_surface="true"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+            <View
+                android:background="#ff0"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_right_bottom"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_first_use_row="false"
+                app:c_use_surface="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
+    <View
+        android:background="#aaa"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
 </LinearLayout>

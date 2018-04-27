@@ -7,7 +7,6 @@ import java.util.List;
  */
 
 public interface TableViewHand {
-    int getCount();
     void addDrawLayer(DrawLayer layer);
     void setData(List<Object> data);
     void notifyDataSetChange();

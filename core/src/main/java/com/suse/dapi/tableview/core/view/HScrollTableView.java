@@ -1,88 +1,100 @@
 package com.suse.dapi.tableview.core.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.HorizontalScrollView;
 
-import com.suse.dapi.tableview.core.R;
-
-import java.util.List;
-
 /**
- * Created by Administrator on 2018/4/25.
+ *
+ *  Created by Administrator on 2018/4/25.
+ *
  */
-public class HScrollTableView extends HorizontalScrollView implements TableViewHand{
+public class HScrollTableView extends HorizontalScrollView implements ScrollHandler{
 
-    private TableView tableView;
+
+    private ScrollXChangeListener xChangeListener;
 
     public HScrollTableView(Context context) {
         super(context);
-        initTableView(context);
-    }
-
-    private void initTableView(Context context) {
-        tableView = new TableView(context);
-        addView(tableView);
+        initTouchListener();
     }
 
     public HScrollTableView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initTableView(context,attrs);
-    }
-
-    private void initTableView(Context context, AttributeSet attrs) {
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.HScrollTableView);
-        int pWidth = (int) array.getDimension(R.styleable.HScrollTableView_h_pWidth,50);
-        int pHeight = (int) array.getDimension(R.styleable.HScrollTableView_h_pHeight,50);
-        int borderWidth = (int) array.getDimension(R.styleable.HScrollTableView_h_borderWidth,1);
-        int row = array.getInt(R.styleable.HScrollTableView_h_row,1);
-        int borderColor = array.getColor(R.styleable.HScrollTableView_h_borderColor, Color.WHITE);
-        int bgColor = array.getColor(R.styleable.HScrollTableView_h_bgColor,Color.WHITE);
-        array.recycle();
-        tableView = new TableView(context,pWidth,pHeight,borderWidth,bgColor,borderColor,row);
-        addView(tableView);
+        initTouchListener();
     }
 
 
     public HScrollTableView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initTableView(context,attrs);
+        initTouchListener();
     }
 
 
-    @Override
-    public int getCount() {
-        return tableView != null ? tableView.getCount() : 0;
-    }
+    private void initTouchListener() {
+        setOnTouchListener(new OnTouchListener() {
+            private int lastX = 0;
+            private int touchEventId = -9983761;
 
-    @Override
-    public void addDrawLayer(DrawLayer layer) {
-        if(tableView != null){
-            tableView.addDrawLayer(layer);
-        }
-    }
-
-    @Override
-    public void setData(List<Object> data) {
-        if(tableView != null){
-            tableView.setData(data);
-        }
-        notifyDataSetChange();
-    }
-
-    @Override
-    public void notifyDataSetChange() {
-        if(tableView != null){
-            tableView.notifyDataSetChange();
-            tableView.post(new Runnable() {
+            Handler handler = new Handler() {
                 @Override
-                public void run() {
-                    smoothScrollTo(tableView.getMeasuredWidth(),0);
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    View scroller = (View) msg.obj;
+
+                    if (msg.what == touchEventId) {
+                        if (lastX == scroller.getScrollX()) {
+                            //停止了，此处你的操作业务
+                            if(xChangeListener != null){
+                                xChangeListener.scrollFinish();
+                            }
+                        } else {
+                            handler.sendMessageDelayed(handler.obtainMessage(touchEventId, scroller), 1);
+                            lastX = scroller.getScrollX();
+                            if(xChangeListener != null){
+                                xChangeListener.xOffsetChange(lastX);
+                            }
+                        }
+                    }
                 }
-            });
+            };
+
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int eventAction = event.getAction();
+                int y = (int) event.getRawY();
+                switch (eventAction) {
+                    case MotionEvent.ACTION_UP:
+                        handler.sendMessageDelayed(handler.obtainMessage(touchEventId, v), 5);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void scrollTo(int offsetX) {
+        smoothScrollTo(offsetX,0);
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if(xChangeListener != null){
+            xChangeListener.xOffsetChange(l);
         }
     }
 
+
+    public void setxChangeListener(ScrollXChangeListener xChangeListener) {
+        this.xChangeListener = xChangeListener;
+    }
 }

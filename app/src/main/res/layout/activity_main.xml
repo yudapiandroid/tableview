@@ -6,31 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.suse.dapi.tableview.core.view.TableView
-        app:bgColor="#fff"
-        app:borderColor="#aaa"
-        app:borderWidth="1dp"
-        app:pHeight="20dp"
-        app:pWidth="20dp"
-        app:row="10"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
 
-    <com.suse.dapi.tableview.core.view.HScrollTableView
-        android:id="@+id/table"
-        app:h_pWidth="20dp"
-        app:h_pHeight="20dp"
-        app:h_borderWidth="1dp"
-        app:h_borderColor="#aaa"
-        app:h_bgColor="#fff"
-        app:h_row="10"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_content"
         android:layout_width="match_parent"
-        android:layout_height="207dp">
-    </com.suse.dapi.tableview.core.view.HScrollTableView>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/add"
-        android:text="add_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 </LinearLayout>
