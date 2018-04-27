@@ -38,13 +38,14 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
         int column = arr.getInt(R.styleable.CombainTableView_c_column,-1);
         int cellWidth = (int) arr.getDimension(R.styleable.CombainTableView_c_cell_width,-1);
         int cellHeight = (int) arr.getDimension(R.styleable.CombainTableView_c_cell_height,-1);
+        boolean firstRow = arr.getBoolean(R.styleable.CombainTableView_c_first_use_row,true);
         arr.recycle();
         // 初始化控件
         if(row > 0){
-            bgView = new TableBgView(context,bgColor,borderColor,borderWidth,row,column);
+            bgView = new TableBgView(context,bgColor,borderColor,borderWidth,row,column,firstRow);
         }
         if(cellWidth > 0){
-            bgView = new TableBgView(bgColor,borderColor,borderWidth,cellWidth,cellHeight,context);
+            bgView = new TableBgView(bgColor,borderColor,borderWidth,cellWidth,cellHeight,context,firstRow);
         }
         if(bgView != null){
             FrameLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

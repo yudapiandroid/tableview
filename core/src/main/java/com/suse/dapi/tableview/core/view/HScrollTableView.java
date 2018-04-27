@@ -34,6 +34,7 @@ public class HScrollTableView extends HorizontalScrollView implements ScrollHand
         initTouchListener();
     }
 
+
     private void initTouchListener() {
         setOnTouchListener(new OnTouchListener() {
             private int lastX = 0;

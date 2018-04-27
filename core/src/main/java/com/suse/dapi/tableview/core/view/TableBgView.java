@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.suse.dapi.tableview.core.R;
+import com.suse.dapi.tableview.core.utils.Log;
 
 
 /**
@@ -49,28 +50,31 @@ public class TableBgView extends View implements CellAware {
     private int cellHeight = -1;
     private Paint borderPaint;
 
+    private boolean firstRow = true;
     private static final int DEFAULT_BG_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_WIDTH = Color.WHITE;
 
 
-    public TableBgView(Context context, int bgColor, int borderColor, int borderWidth, int row, int column) {
+    public TableBgView(Context context, int bgColor, int borderColor, int borderWidth, int row, int column,boolean firstRow) {
         super(context);
         this.bgColor = bgColor;
         this.borderColor = borderColor;
         this.borderWidth = borderWidth;
         this.row = row;
         this.column = column;
+        this.firstRow = firstRow;
         init(context);
     }
 
-    public TableBgView(int bgColor, int borderColor, int borderWidth, int cellWidth, int cellHeight,Context context) {
+    public TableBgView(int bgColor, int borderColor, int borderWidth, int cellWidth, int cellHeight,Context context,boolean firstRow) {
         super(context);
         this.bgColor = bgColor;
         this.borderColor = borderColor;
         this.borderWidth = borderWidth;
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
+        this.firstRow = firstRow;
         init(context);
     }
 
@@ -114,14 +118,14 @@ public class TableBgView extends View implements CellAware {
         int height = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(width,height);
 
-        if(row > 0 && column > 0){
+        if(firstRow){
             int borderW = (row - 1) * borderWidth;
             int borderH = (column - 1) * borderWidth;
             cellWidth = (width - borderW) / column;
             cellHeight = (height - borderH) / row;
         } else {
-            row = height / cellHeight;
-            column = width / cellWidth;
+            row = height / cellHeight + borderWidth;
+            column = width / cellWidth + borderWidth;
         }
     } // end m
 
@@ -131,9 +135,34 @@ public class TableBgView extends View implements CellAware {
         if((row <= 0 || column <= 0) && (cellWidth <= 0 || cellHeight <= 0)){
             return;
         }
-        drawByRowColumn(row,column,canvas);
+        if(firstRow){
+            drawByRowColumn(row,column,canvas);
+        }else{
+            drawByCellWidthHeight(canvas);
+        }
     } // end m
 
+
+    /**
+     *
+     * 根据 cell width 和 cell height绘制
+     *
+     */
+    private void drawByCellWidthHeight(Canvas canvas) {
+        // 横线
+        Log.i("draw "+getMeasuredHeight()+"  cell "+cellHeight);
+        for (int y = cellHeight;y < getMeasuredHeight();y += cellHeight){
+            canvas.drawLine(0,y,getMeasuredWidth(),y,borderPaint);
+            y += borderWidth;
+        }
+
+        // 竖线
+        for (int x = cellWidth;x < getMeasuredWidth();x += cellWidth) {
+            canvas.drawLine(x,0,x,getMeasuredHeight(),borderPaint);
+            x += borderWidth;
+        }
+
+    }
 
 
     /**

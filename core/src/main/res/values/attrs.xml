@@ -19,6 +19,7 @@
         <attr name="c_column" format="integer"/>
         <attr name="c_cell_width" format="dimension"/>
         <attr name="c_cell_height" format="dimension"/>
+        <attr name="c_first_use_row" format="boolean"/>
     </declare-styleable>
 
 </resources>

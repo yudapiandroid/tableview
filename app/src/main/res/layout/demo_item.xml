@@ -7,4 +7,111 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="95dp">
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_left_top"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                android:layout_width="143dp"
+                app:c_first_use_row="false"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+            <View
+                android:background="#ffff00"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_right_top"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_border_width="1dp"
+                android:layout_width="match_parent"
+                app:c_first_use_row="false"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+        </LinearLayout>
+
+        <View
+            android:background="#ffff00"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="47dp">
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_left_bottom"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_first_use_row="false"
+                android:layout_width="143dp"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+            <View
+                android:background="#ff0"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_center_bottom"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_first_use_row="false"
+                android:layout_width="143dp"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+            <View
+                android:background="#ff0"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <com.suse.dapi.tableview.core.view.CombainTableView
+                android:id="@+id/table_right_bottom"
+                app:c_bg_color="#fff"
+                app:c_border_color="#eee"
+                app:c_border_width="1dp"
+                app:c_cell_width="15dp"
+                app:c_cell_height="15dp"
+                app:c_first_use_row="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.suse.dapi.tableview.core.view.CombainTableView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:background="#aaa"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
 </LinearLayout>
