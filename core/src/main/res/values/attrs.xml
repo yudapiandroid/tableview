@@ -19,8 +19,9 @@
         <attr name="c_column" format="integer"/>
         <attr name="c_cell_width" format="dimension"/>
         <attr name="c_cell_height" format="dimension"/>
-        <attr name="c_first_use_row" format="boolean"/>
-        <attr name="c_use_surface" format="boolean"/>
+        <!--  在绘制背景的时候需要确定是使用 固定的cell宽度 还是 自动计算 *自动计算的时候有些误差* -->
+        <attr name="c_use_cell_fix" format="boolean"/>
+        <attr name="c_use_open_gl" format="boolean"/>
     </declare-styleable>
 
 </resources>

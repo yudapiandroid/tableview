@@ -7,11 +7,29 @@
     android:layout_height="match_parent">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_content"
+    <com.suse.dapi.tableview.core.view.CombainTableView
+        android:id="@+id/table_view"
+        app:c_cell_width="20dp"
+        app:c_cell_height="20dp"
+        app:c_border_width="1dp"
+        app:c_border_color="#ff0"
+        app:c_bg_color="#fff"
+        app:c_use_cell_fix="true"
+        app:c_use_open_gl="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="104dp">
+    </com.suse.dapi.tableview.core.view.CombainTableView>
 
+    <Button
+        android:id="@+id/add"
+        android:text="ADD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/remove"
+        android:text="REMOVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

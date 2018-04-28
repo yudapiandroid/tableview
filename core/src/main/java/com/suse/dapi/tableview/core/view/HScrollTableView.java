@@ -8,15 +8,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 
+import com.suse.dapi.tableview.core.view.interfaces.ScrollHandler;
+import com.suse.dapi.tableview.core.view.interfaces.TableViewInterface;
+
 /**
  *
  *  Created by Administrator on 2018/4/25.
  *
  */
-public class HScrollTableView extends HorizontalScrollView implements ScrollHandler{
+public class HScrollTableView extends HorizontalScrollView implements ScrollHandler {
 
 
-    private ScrollXChangeListener xChangeListener;
+    private TableViewInterface xChangeListener;
 
     public HScrollTableView(Context context) {
         super(context);
@@ -94,7 +97,7 @@ public class HScrollTableView extends HorizontalScrollView implements ScrollHand
     }
 
 
-    public void setxChangeListener(ScrollXChangeListener xChangeListener) {
+    public void setxChangeListener(TableViewInterface xChangeListener) {
         this.xChangeListener = xChangeListener;
     }
 }

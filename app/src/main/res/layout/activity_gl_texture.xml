@@ -3,8 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.suse.dapi.tableview.GLTexutDemoView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+    <HorizontalScrollView
+        android:background="#ff0"
+        android:layout_width="5000px"
+        android:layout_height="wrap_content">
+        <com.suse.dapi.tableview.GLTexutDemoView
+            android:layout_width="5000px"
+            android:layout_height="150px" />
+    </HorizontalScrollView>
 
 </LinearLayout>
