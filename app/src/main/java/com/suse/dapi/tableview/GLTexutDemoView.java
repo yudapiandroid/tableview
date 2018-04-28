@@ -30,6 +30,14 @@ public class GLTexutDemoView extends GLTextureView {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(width,height);
+    }
+
+    @Override
     protected void onGLDraw(ICanvasGL canvas) {
 
         //circle
@@ -43,7 +51,6 @@ public class GLTexutDemoView extends GLTextureView {
         strokeCirclePaint.setLineWidth(4);
         strokeCirclePaint.setStyle(Paint.Style.STROKE);
         canvas.drawCircle(490, 30, 30, strokeCirclePaint);
-
     }
 
 }

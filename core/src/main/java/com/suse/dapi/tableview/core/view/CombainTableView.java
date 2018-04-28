@@ -6,19 +6,26 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.ListAdapter;
 
 import com.suse.dapi.tableview.core.R;
+import com.suse.dapi.tableview.core.view.interfaces.BaseTableViewInterface;
+import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
+import com.suse.dapi.tableview.core.view.interfaces.TableViewInterface;
 
 import java.util.List;
 
 /**
  * Created by YuXin on 2018/4/25.
  */
-public class CombainTableView extends FrameLayout implements TableViewHand{
+public class CombainTableView extends FrameLayout implements BaseTableViewInterface{
 
     private TableBgView bgView;
     private HScrollTableView hScrollTableView;
+    private TableViewInterface tableViewI;
     private View tableView;
 
     public CombainTableView(Context context) {
@@ -39,16 +46,17 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
         int column = arr.getInt(R.styleable.CombainTableView_c_column,-1);
         int cellWidth = (int) arr.getDimension(R.styleable.CombainTableView_c_cell_width,-1);
         int cellHeight = (int) arr.getDimension(R.styleable.CombainTableView_c_cell_height,-1);
-        boolean firstRow = arr.getBoolean(R.styleable.CombainTableView_c_first_use_row,true);
-        boolean useSurface = arr.getBoolean(R.styleable.CombainTableView_c_use_surface,false);
+        boolean cellFix = arr.getBoolean(R.styleable.CombainTableView_c_use_cell_fix,true);
+        boolean useOpengl = arr.getBoolean(R.styleable.CombainTableView_c_use_open_gl,false);
         arr.recycle();
+
         // 初始化控件
-        if(row > 0){
-            bgView = new TableBgView(context,bgColor,borderColor,borderWidth,row,column,firstRow);
+        if(cellFix){
+            bgView = new TableBgView(bgColor,borderColor,borderWidth,cellWidth,cellHeight,context,cellFix);
+        }else{
+            bgView = new TableBgView(context,bgColor,borderColor,borderWidth,row,column,cellFix);
         }
-        if(cellWidth > 0){
-            bgView = new TableBgView(bgColor,borderColor,borderWidth,cellWidth,cellHeight,context,firstRow);
-        }
+
         if(bgView != null){
             FrameLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             bgView.setLayoutParams(params);
@@ -60,17 +68,14 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
         hScrollTableView.setLayoutParams(hsParams);
         addView(hScrollTableView);
 
-        tableView = useSurface ? new TableSurfaceView(context) : new TableView(context);
-        HScrollTableView.LayoutParams tableParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        tableView.setLayoutParams(tableParams);
+        tableView = useOpengl ? new TableSurfaceView(context) : new TableView(context);
+        tableViewI = (TableViewInterface) tableView;
+        hScrollTableView.setxChangeListener(tableViewI);
+        tableViewI.setScrollHandler(hScrollTableView);
+        tableViewI.setCellInfo(bgView);
+
         hScrollTableView.addView(tableView);
-
-
-        hScrollTableView.setxChangeListener((ScrollXChangeListener) tableView);
-        TableViewUI tv = (TableViewUI) tableView;
-        tv.setScrollHandler(hScrollTableView);
-        tv.setCellAware(bgView);
-
+        //HScrollTableView.LayoutParams tableParam = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }// end m
 
     public CombainTableView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -81,21 +86,21 @@ public class CombainTableView extends FrameLayout implements TableViewHand{
     @Override
     public void addDrawLayer(DrawLayer layer) {
         if(tableView != null){
-            ((TableViewHand)tableView).addDrawLayer(layer);
+            tableViewI.addDrawLayer(layer);
         }
     }
 
     @Override
     public void setData(List<Object> data) {
         if(tableView != null){
-            ((TableViewHand)tableView).setData(data);
+            tableViewI.setData(data);
         }
     }
 
     @Override
     public void notifyDataSetChange() {
         if(tableView != null){
-            ((TableViewHand)tableView).notifyDataSetChange();
+            tableViewI.notifyDataSetChange();
         }
     }
 

@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.suse.dapi.tableview.core.R;
-import com.suse.dapi.tableview.core.utils.Log;
+import com.suse.dapi.tableview.core.view.interfaces.CellInfo;
 
 
 /**
@@ -22,7 +22,7 @@ import com.suse.dapi.tableview.core.utils.Log;
  *
  *
  */
-public class TableBgView extends View implements CellAware {
+public class TableBgView extends View implements CellInfo {
 
     /**
      *
@@ -50,31 +50,31 @@ public class TableBgView extends View implements CellAware {
     private int cellHeight = -1;
     private Paint borderPaint;
 
-    private boolean firstRow = true;
+    private boolean useFixModel = true;
     private static final int DEFAULT_BG_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_WIDTH = Color.WHITE;
 
 
-    public TableBgView(Context context, int bgColor, int borderColor, int borderWidth, int row, int column,boolean firstRow) {
+    public TableBgView(Context context, int bgColor, int borderColor, int borderWidth, int row, int column,boolean useFixModel) {
         super(context);
         this.bgColor = bgColor;
         this.borderColor = borderColor;
         this.borderWidth = borderWidth;
         this.row = row;
         this.column = column;
-        this.firstRow = firstRow;
+        this.useFixModel = useFixModel;
         init(context);
     }
 
-    public TableBgView(int bgColor, int borderColor, int borderWidth, int cellWidth, int cellHeight,Context context,boolean firstRow) {
+    public TableBgView(int bgColor, int borderColor, int borderWidth, int cellWidth, int cellHeight,Context context,boolean useFixModel) {
         super(context);
         this.bgColor = bgColor;
         this.borderColor = borderColor;
         this.borderWidth = borderWidth;
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
-        this.firstRow = firstRow;
+        this.useFixModel = useFixModel;
         init(context);
     }
 
@@ -118,14 +118,14 @@ public class TableBgView extends View implements CellAware {
         int height = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(width,height);
 
-        if(firstRow){
+        if(!useFixModel){
             int borderW = (row - 1) * borderWidth;
             int borderH = (column - 1) * borderWidth;
             cellWidth = (width - borderW) / column;
             cellHeight = (height - borderH) / row;
         } else {
-            row = height / cellHeight + borderWidth;
-            column = width / cellWidth + borderWidth;
+            row = height % (cellHeight + borderWidth) == 0 ? height / (cellHeight + borderWidth) : height / (cellHeight + borderWidth) +1;
+            column = width % (cellWidth + borderWidth) == 0 ? width / (cellWidth + borderWidth) : width / (cellWidth + borderWidth) + 1;
         }
     } // end m
 
@@ -135,7 +135,8 @@ public class TableBgView extends View implements CellAware {
         if((row <= 0 || column <= 0) && (cellWidth <= 0 || cellHeight <= 0)){
             return;
         }
-        if(firstRow){
+
+        if(!useFixModel){
             drawByRowColumn(row,column,canvas);
         }else{
             drawByCellWidthHeight(canvas);
@@ -175,25 +176,15 @@ public class TableBgView extends View implements CellAware {
 
         // 绘制横线
         for (int i = 1;i < row;i++){
-            int y = cellHeight * i + borderWidth * i;
+            int y = (cellHeight + borderWidth) * i;
             canvas.drawLine(0,y,getMeasuredWidth(),y,borderPaint);
         }
 
         // 绘制竖线
         for (int i=1; i < column;i++){
-            int x = cellWidth * i + borderWidth * i;
+            int x = (cellWidth  + borderWidth) * i;
             canvas.drawLine(x,0,x,getMeasuredHeight(),borderPaint);
         }
-    }
-
-    @Override
-    public Rect getRectByRowWithColumn(int row, int column) {
-        Rect rect = new Rect();
-        rect.left = (borderWidth + cellWidth) * column;
-        rect.right = rect.left + cellWidth;
-        rect.top = (borderWidth + cellHeight) * row;
-        rect.bottom = rect.top + cellHeight;
-        return rect;
     }
 
     @Override
