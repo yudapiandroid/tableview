@@ -15,7 +15,7 @@
         app:c_border_color="#ff0"
         app:c_bg_color="#fff"
         app:c_use_cell_fix="true"
-        app:c_use_open_gl="true"
+        app:c_use_open_gl="false"
         android:layout_width="match_parent"
         android:layout_height="104dp">
     </com.suse.dapi.tableview.core.view.CombainTableView>

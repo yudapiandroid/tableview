@@ -66,6 +66,7 @@ public class CombainTableView extends FrameLayout implements BaseTableViewInterf
         FrameLayout.LayoutParams hsParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         hScrollTableView = new HScrollTableView(context);
         hScrollTableView.setLayoutParams(hsParams);
+        hScrollTableView.setHorizontalScrollBarEnabled(false);
         addView(hScrollTableView);
 
         tableView = useOpengl ? new TableSurfaceView(context) : new TableView(context);

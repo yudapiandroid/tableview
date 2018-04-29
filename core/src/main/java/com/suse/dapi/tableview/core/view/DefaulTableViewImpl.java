@@ -36,7 +36,6 @@ public class DefaulTableViewImpl {
             int column = size % cellInfo.getRow() == 0 ? size / cellInfo.getRow() : size / cellInfo.getRow() + 1;
             width = (cellInfo.getCellWidth() + cellInfo.getBorderWidth()) * column;
         }
-        Log.i("onMeasure "+width+"  "+height);
         tableView.setMeasuredDimensionX(width,height);
     }
 

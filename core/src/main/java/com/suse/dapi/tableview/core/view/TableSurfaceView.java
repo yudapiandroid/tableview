@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import com.chillingvan.canvasgl.ICanvasGL;
 import com.chillingvan.canvasgl.glview.texture.GLTextureView;
 import com.chillingvan.canvasgl.glview.texture.gles.GLThread;
+import com.suse.dapi.tableview.core.utils.BitmapUtils;
 import com.suse.dapi.tableview.core.utils.Log;
 import com.suse.dapi.tableview.core.view.interfaces.CellInfo;
 import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
@@ -52,10 +53,10 @@ public class TableSurfaceView extends GLTextureView implements TableViewInterfac
         post(new Runnable() {
             @Override
             public void run() {
-                invalidate(0,0,getMeasuredWidth(),getMeasuredHeight());
-                requestRender();
                 if(scrollHandler != null){
                     scrollHandler.scrollTo(getMeasuredWidth());
+                    requestRender();
+                    tableView.scrollFinish();
                 }
             }
         });

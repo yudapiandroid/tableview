@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         final List<Object> models = new ArrayList<>();
         final Random random = new Random();
-        for(int i=0;i < 500;i++){
+        for(int i=0;i < 5;i++){
             TypeBitmapModel model = new TypeBitmapModel();
             model.setCurrentType(types[random.nextInt(types.length)]);
             models.add(model);
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0;i < 3000;i++){
+
+                for (int i=0;i < 200;i++){
                     TypeBitmapModel model = new TypeBitmapModel();
                     model.setCurrentType(types[random.nextInt(types.length)]);
                     models.add(model);
@@ -67,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.remove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=1;i<2000;i++){
-                    models.remove(models.size() - i);
-                }
+                models.remove(models.size() - 1);
                 tableView.notifyDataSetChange();
             }
         });

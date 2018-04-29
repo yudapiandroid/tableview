@@ -3,10 +3,12 @@ package com.suse.dapi.tableview.core.prefab;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.chillingvan.canvasgl.ICanvasGL;
+import com.chillingvan.canvasgl.glcanvas.GLPaint;
 import com.suse.dapi.tableview.core.utils.BitmapUtils;
 import com.suse.dapi.tableview.core.utils.Log;
 import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
@@ -46,7 +48,6 @@ public abstract class TypeBitmapDrawLayer implements DrawLayer {
             return;
         }
 
-        Log.i("Draw  : "+rect);
         // 绘制
         if(canvas != null){
             drawByCanvas(bitmap,rect,padding,canvas);

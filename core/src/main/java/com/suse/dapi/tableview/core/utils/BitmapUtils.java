@@ -51,4 +51,12 @@ public class BitmapUtils {
         return bitmapPool.get(res);
     }
 
+
+    public static void clearCaChe(){
+        if(bitmapPool == null){
+            return;
+        }
+        bitmapPool.clear();
+    }
+
 }

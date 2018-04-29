@@ -132,13 +132,13 @@ public class TableView extends View implements TableViewInterface{
 
     @Override
     public void notifyDataSetChange() {
-        // requestLayout();
-        invalidate();
+        requestLayout();
         post(new Runnable() {
             @Override
             public void run() {
                 if(scrollHandler != null){
                     scrollHandler.scrollTo(getMeasuredWidth());
+                    tableView.scrollFinish();
                 }
             }
         });
