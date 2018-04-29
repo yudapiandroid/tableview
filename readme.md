@@ -6,6 +6,7 @@
 表格控件 **CombainTableView**
 
 ![tableView](https://github.com/yudapiandroid/tableview/blob/master/images/table_view.jpg)
+
 图中红色标出的一个方块称为一个 cell
 
 ---
@@ -25,7 +26,7 @@ allprojects {
 添加依赖
 ```xml
 dependencies {
-	        compile 'com.github.yudapiandroid:tableview:0.0.2'
+	        compile 'com.github.yudapiandroid:tableview:0.0.3'
 	}
 ```
 
