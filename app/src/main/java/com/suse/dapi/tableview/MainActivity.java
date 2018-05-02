@@ -1,7 +1,6 @@
 package com.suse.dapi.tableview;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
     private CombainTableView tableView;
 
+    private RecyclerView recyclerView;
+    private List<Object> data = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initData();
     }
 
     private static final int[] types = {
@@ -52,31 +53,87 @@ public class MainActivity extends AppCompatActivity {
         }
         tableView.addDrawLayer(new TypeBitmapLayer(1,this));
         tableView.setData(models);
-        findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                for (int i=0;i < 200;i++){
-                    TypeBitmapModel model = new TypeBitmapModel();
-                    model.setCurrentType(types[random.nextInt(types.length)]);
-                    models.add(model);
-                }
-                tableView.notifyDataSetChange();
-            }
-        });
-
-        findViewById(R.id.remove).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                models.remove(models.size() - 1);
-                tableView.notifyDataSetChange();
-            }
-        });
     }
 
 
     private void initView() {
-        tableView = (CombainTableView) findViewById(R.id.table_view);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_content);
+        GridLayoutManager manager = new GridLayoutManager(this,1);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(new DemoAdapter(data));
     }// end m
+
+}
+
+
+class DemoAdapter extends RecyclerView.Adapter{
+
+    private List<Object> data;
+
+    public DemoAdapter(List<Object> data) {
+        this.data = data;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        DemoViewHolder demoViewHolder = new DemoViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.demo_item,null),parent.getContext());
+        return demoViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder instanceof DemoViewHolder){
+            DemoViewHolder viewHolder = (DemoViewHolder) holder;
+            viewHolder.setData();
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return 1000;
+    }
+
+    class DemoViewHolder extends RecyclerView.ViewHolder{
+
+
+        private CombainTableView left;
+        private CombainTableView right;
+        private Context context;
+
+        public DemoViewHolder(View itemView,Context context) {
+            super(itemView);
+            this.context = context;
+            left = (CombainTableView) itemView.findViewById(R.id.left_view);
+            right = (CombainTableView) itemView.findViewById(R.id.right_view);
+            initData();
+        }
+
+        public void setData(){
+            left.setData(models);
+            right.setData(models);
+        }
+
+
+        private final int[] types = {
+                TypeBitmapModel.TYPE_01,
+                TypeBitmapModel.TYPE_02,
+                TypeBitmapModel.TYPE_03,
+                TypeBitmapModel.TYPE_04
+        };
+
+        List<Object> models;
+        private void initData() {
+            models = new ArrayList<>();
+            final Random random = new Random();
+            for(int i=0;i < 5000;i++){
+                TypeBitmapModel model = new TypeBitmapModel();
+                model.setCurrentType(types[random.nextInt(types.length)]);
+                models.add(model);
+            }
+            left.addDrawLayer(new TypeBitmapLayer(1,context));
+            right.addDrawLayer(new TypeBitmapLayer(1,context));
+        }
+
+    }
 
 }

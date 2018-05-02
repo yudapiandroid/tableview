@@ -29,11 +29,11 @@ public class DefaulTableViewImpl {
 
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = View.MeasureSpec.getSize(heightMeasureSpec);
-        int width = View.MeasureSpec.getSize(widthMeasureSpec);
+        int width = widthMeasureSpec == 0 ? 0 : View.MeasureSpec.getSize(widthMeasureSpec);
         if(tableView != null && tableView.getData() != null && tableView.getCellInfo() != null){
             int size = tableView.getData().size();
             CellInfo cellInfo = tableView.getCellInfo();
-            int column = size % cellInfo.getRow() == 0 ? size / cellInfo.getRow() : size / cellInfo.getRow() + 1;
+            int column = cellInfo.getRow() == 0 ? 0 : size % cellInfo.getRow() == 0 ? size / cellInfo.getRow() : size / cellInfo.getRow() + 1;
             width = (cellInfo.getCellWidth() + cellInfo.getBorderWidth()) * column;
         }
         tableView.setMeasuredDimensionX(width,height);

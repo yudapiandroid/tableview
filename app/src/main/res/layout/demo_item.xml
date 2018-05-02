@@ -2,7 +2,36 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.suse.dapi.tableview.core.view.CombainTableView
+        android:id="@+id/left_view"
+        app:c_cell_width="20dp"
+        app:c_cell_height="20dp"
+        app:c_border_width="1dp"
+        app:c_border_color="#ff0"
+        app:c_bg_color="#fff"
+        app:c_use_cell_fix="true"
+        app:c_use_open_gl="false"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="104dp">
+    </com.suse.dapi.tableview.core.view.CombainTableView>
+
+    <com.suse.dapi.tableview.core.view.CombainTableView
+        android:id="@+id/right_view"
+        app:c_cell_width="20dp"
+        app:c_cell_height="20dp"
+        app:c_border_width="1dp"
+        app:c_border_color="#ff0"
+        app:c_bg_color="#fff"
+        app:c_use_cell_fix="true"
+        app:c_use_open_gl="false"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="104dp">
+    </com.suse.dapi.tableview.core.view.CombainTableView>
+
 </LinearLayout>
