@@ -98,6 +98,8 @@ class DemoAdapter extends RecyclerView.Adapter{
 
         private CombainTableView left;
         private CombainTableView right;
+        private CombainTableView left1;
+        private CombainTableView right1;
         private Context context;
 
         public DemoViewHolder(View itemView,Context context) {
@@ -105,12 +107,16 @@ class DemoAdapter extends RecyclerView.Adapter{
             this.context = context;
             left = (CombainTableView) itemView.findViewById(R.id.left_view);
             right = (CombainTableView) itemView.findViewById(R.id.right_view);
+            left1 = (CombainTableView) itemView.findViewById(R.id.left_view_1);
+            right1 = (CombainTableView) itemView.findViewById(R.id.right_view_2);
             initData();
         }
 
         public void setData(){
             left.setData(models);
             right.setData(models);
+            left1.setData(models);
+            right1.setData(models);
         }
 
 
@@ -132,6 +138,8 @@ class DemoAdapter extends RecyclerView.Adapter{
             }
             left.addDrawLayer(new TypeBitmapLayer(1,context));
             right.addDrawLayer(new TypeBitmapLayer(1,context));
+            left1.addDrawLayer(new TypeBitmapLayer(1,context));
+            right1.addDrawLayer(new TypeBitmapLayer(1,context));
         }
 
     }
