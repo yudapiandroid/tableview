@@ -64,7 +64,7 @@ dependencies {
 
 控件的宽度和高度计算
 
-- 指定cell宽度 和 高度
+- 指定cell宽度 和 高度 <br/>
   （ cell宽度 + border宽度 ） * 想要的列数
   （ cell高度 + border高度 ） * 想要的行数
 
