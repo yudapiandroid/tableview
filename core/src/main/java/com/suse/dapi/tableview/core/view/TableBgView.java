@@ -124,8 +124,8 @@ public class TableBgView extends View implements CellInfo {
             cellWidth = (width - borderW) / column;
             cellHeight = (height - borderH) / row;
         } else {
-            row = height % (cellHeight + borderWidth) == 0 ? height / (cellHeight + borderWidth) : height / (cellHeight + borderWidth) +1;
-            column = width % (cellWidth + borderWidth) == 0 ? width / (cellWidth + borderWidth) : width / (cellWidth + borderWidth) + 1;
+            row = height / (cellHeight + borderWidth);
+            column = width / (cellWidth + borderWidth);
         }
     } // end m
 

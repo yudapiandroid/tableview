@@ -20,9 +20,8 @@
             app:c_bg_color="#fff"
             app:c_use_cell_fix="true"
             app:c_use_open_gl="false"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="104dp">
+            android:layout_width="105dp"
+            android:layout_height="105dp">
         </com.suse.dapi.tableview.core.view.CombainTableView>
 
         <com.suse.dapi.tableview.core.view.CombainTableView
@@ -36,7 +35,7 @@
             app:c_use_open_gl="false"
             android:layout_weight="2"
             android:layout_width="0dp"
-            android:layout_height="104dp">
+            android:layout_height="105dp">
         </com.suse.dapi.tableview.core.view.CombainTableView>
 
     </LinearLayout>

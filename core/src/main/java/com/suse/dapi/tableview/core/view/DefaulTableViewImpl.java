@@ -57,7 +57,7 @@ public class DefaulTableViewImpl {
         int row = cellInfo.getRow();
         int allColumn = data.size() % row == 0 ? data.size() / row : data.size() / row + 1;
         int startColumn = getStartColumnByOffsetX(tableView.getOffsetX(),cellInfo.getCellWidth());
-        int endColumn = startColumn + column + column / 4;
+        int endColumn = startColumn + column;
         endColumn = endColumn > allColumn ? allColumn : endColumn;
 
         for (int i = startColumn; i < endColumn; i++){
@@ -123,7 +123,7 @@ public class DefaulTableViewImpl {
             return 0;
         }
         int number = offsetX / (cellWidth + tableView.getCellInfo().getBorderWidth());
-        return number <= 0 ? 0 : number - 1;
+        return number <= 0 ? 0 : number;
     }
 
 }

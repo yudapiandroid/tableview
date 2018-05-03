@@ -59,6 +59,18 @@ dependencies {
     - false 如果是false 则需要指定 c_row 和 c_column ，cell的宽度和高度会自动计算
 - c_use_open_gl 绘制的时候是否使用opengl来绘制 这个在多次添加大量数据后有拉伸的情况
 
+
+---
+
+控件的宽度和高度计算
+
+- 指定cell宽度 和 高度
+  （ cell宽度 + border宽度 ） * 想要的列数
+  （ cell高度 + border高度 ） * 想要的行数
+
+
+---
+
 #Layer说明
 ```java
         public interface DrawLayer {

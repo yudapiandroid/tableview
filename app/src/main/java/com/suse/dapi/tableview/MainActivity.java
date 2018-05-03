@@ -10,15 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.suse.dapi.tableview.core.view.CombainTableView;
-import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
-import com.suse.dapi.tableview.entrys.FourPerCellModel;
 import com.suse.dapi.tableview.entrys.TypeBitmapModel;
 import com.suse.dapi.tableview.layer.TypeBitmapLayer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
