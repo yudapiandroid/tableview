@@ -13,6 +13,7 @@ import android.widget.ListAdapter;
 
 import com.suse.dapi.tableview.core.R;
 import com.suse.dapi.tableview.core.view.interfaces.BaseTableViewInterface;
+import com.suse.dapi.tableview.core.view.interfaces.CellInfoChangeLisenter;
 import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
 import com.suse.dapi.tableview.core.view.interfaces.TableViewInterface;
 
@@ -74,6 +75,8 @@ public class CombainTableView extends FrameLayout implements BaseTableViewInterf
         hScrollTableView.setxChangeListener(tableViewI);
         tableViewI.setScrollHandler(hScrollTableView);
         tableViewI.setCellInfo(bgView);
+
+        bgView.addCellInfoChangeLisenter((CellInfoChangeLisenter) tableView);
 
         hScrollTableView.addView(tableView);
         //HScrollTableView.LayoutParams tableParam = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);

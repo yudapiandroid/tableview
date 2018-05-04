@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 
+import com.suse.dapi.tableview.core.utils.Log;
 import com.suse.dapi.tableview.core.view.interfaces.CellInfo;
+import com.suse.dapi.tableview.core.view.interfaces.CellInfoChangeLisenter;
 import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
 import com.suse.dapi.tableview.core.view.interfaces.ScrollHandler;
 import com.suse.dapi.tableview.core.view.interfaces.TableViewInterface;
@@ -19,7 +21,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2018/4/24.
  */
-public class TableView extends View implements TableViewInterface{
+public class TableView extends View implements TableViewInterface,CellInfoChangeLisenter{
 
     private List<DrawLayer> layers = new ArrayList<>();
     private List<Object> data;
@@ -136,6 +138,7 @@ public class TableView extends View implements TableViewInterface{
         post(new Runnable() {
             @Override
             public void run() {
+                invalidate();
                 if(scrollHandler != null){
                     scrollHandler.scrollTo(getMeasuredWidth());
                     tableView.scrollFinish();
@@ -149,4 +152,16 @@ public class TableView extends View implements TableViewInterface{
         this.cellInfo = cellInfo;
     }
 
+    @Override
+    public void onCellInfoChange() {
+        if(getMeasuredWidth() > 0){
+            return;
+        }
+        post(new Runnable() {
+            @Override
+            public void run() {
+                notifyDataSetChange();
+            }
+        });
+    }
 }

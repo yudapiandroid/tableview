@@ -11,7 +11,12 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.suse.dapi.tableview.core.R;
+import com.suse.dapi.tableview.core.utils.Log;
 import com.suse.dapi.tableview.core.view.interfaces.CellInfo;
+import com.suse.dapi.tableview.core.view.interfaces.CellInfoChangeLisenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -55,6 +60,8 @@ public class TableBgView extends View implements CellInfo {
     private static final int DEFAULT_BORDER_COLOR = Color.WHITE;
     private static final int DEFAULT_BORDER_WIDTH = Color.WHITE;
 
+
+    private List<CellInfoChangeLisenter> lisenters = new ArrayList<>();
 
     public TableBgView(Context context, int bgColor, int borderColor, int borderWidth, int row, int column,boolean useFixModel) {
         super(context);
@@ -118,16 +125,36 @@ public class TableBgView extends View implements CellInfo {
         int height = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(width,height);
 
+        int oldW = cellWidth;
+        int oldH = cellHeight;
+        int oldR = row;
+        int oldC = column;
+
         if(!useFixModel){
             int borderW = (row - 1) * borderWidth;
             int borderH = (column - 1) * borderWidth;
             cellWidth = (width - borderW) / column;
             cellHeight = (height - borderH) / row;
+            if(cellWidth != oldW || cellHeight != oldH){
+                sendCellInfoChange();
+            }
         } else {
             row = height / (cellHeight + borderWidth);
             column = width / (cellWidth + borderWidth);
+            if(row != oldR || column != oldC){
+                sendCellInfoChange();
+            }
         }
+
     } // end m
+
+    private void sendCellInfoChange() {
+        if(lisenters != null){
+            for (CellInfoChangeLisenter lisenter : lisenters){
+                lisenter.onCellInfoChange();
+            }
+        }
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -210,6 +237,13 @@ public class TableBgView extends View implements CellInfo {
     @Override
     public int getColumn() {
         return column;
+    }
+
+
+    public void addCellInfoChangeLisenter(CellInfoChangeLisenter lisenter){
+        if(lisenter != null && lisenters != null && !lisenters.contains(lisenter)){
+            lisenters.add(lisenter);
+        }
     }
 
 }

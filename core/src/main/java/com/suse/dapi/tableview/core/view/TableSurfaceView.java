@@ -10,6 +10,7 @@ import com.chillingvan.canvasgl.glview.texture.gles.GLThread;
 import com.suse.dapi.tableview.core.utils.BitmapUtils;
 import com.suse.dapi.tableview.core.utils.Log;
 import com.suse.dapi.tableview.core.view.interfaces.CellInfo;
+import com.suse.dapi.tableview.core.view.interfaces.CellInfoChangeLisenter;
 import com.suse.dapi.tableview.core.view.interfaces.DrawLayer;
 import com.suse.dapi.tableview.core.view.interfaces.ScrollHandler;
 import com.suse.dapi.tableview.core.view.interfaces.TableViewInterface;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by YuXin on 2018/4/27.
  */
-public class TableSurfaceView extends GLTextureView implements TableViewInterface{
+public class TableSurfaceView extends GLTextureView implements TableViewInterface,CellInfoChangeLisenter{
 
     private List<DrawLayer> layers = new ArrayList<>();
     private List<Object> data;
@@ -169,4 +170,8 @@ public class TableSurfaceView extends GLTextureView implements TableViewInterfac
         this.cellInfo = cellInfo;
     }
 
+    @Override
+    public void onCellInfoChange() {
+        notifyDataSetChange();
+    }
 }

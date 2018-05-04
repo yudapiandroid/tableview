@@ -86,7 +86,7 @@ class DemoAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return 1000;
+        return 10;
     }
 
     class DemoViewHolder extends RecyclerView.ViewHolder{
