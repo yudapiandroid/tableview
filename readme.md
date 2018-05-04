@@ -26,7 +26,7 @@ allprojects {
 添加依赖
 ```xml
 dependencies {
-	        compile 'com.github.yudapiandroid:tableview:0.0.3'
+	        compile 'com.github.yudapiandroid:tableview:0.0.4'
 	}
 ```
 
